@@ -48,10 +48,13 @@ const convertDirectorsJsonToObj = (jsonDirectorResponse) => {
 app.get("/movies/", async (request, response) => {
   try {
     const getAllMoviesQuery = `
-    SELECT * 
+    SELECT movie_name 
     FROM movie;`;
     const moviesList = await database.all(getAllMoviesQuery);
-    Response.send(moviesList.map((eachObj) => convertMovieJsonToObj(eachObj)));
+    //console.log(moviesList);
+    response.send(
+      moviesList.map((eachObj) => ({ movieName: eachObj.movie_name }))
+    );
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
     //process.exit(1);
@@ -88,7 +91,7 @@ app.get("/movies/:movieId/", async (request, response) => {
         FROM movie
         WHERE movie_id = ${movieId};`;
     const movieDetails = await database.get(getMovieQuery);
-    response.send(convertMovieJsonToObj(movieDetails));
+    response.send(convertMoviesJsonToObj(movieDetails));
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
     //process.exit();
