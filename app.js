@@ -151,13 +151,23 @@ app.get("/directors/", async (request, response) => {
   }
 });
 
-//API-6:Returns a list of all directors in the director table
+//API-7:Returns a list of all movie names directed by a specific director
 
 app.get("/directors/:directorId/movies/", async (request, response) => {
   try {
     const { directorId } = request.params;
+    const getDirectorMoviesQuery = `
+        SELECT movie_name
+        FROM movie
+        WHERE director_id = ${directorId};`;
+    const directorMoviesList = await database.all(getDirectorMoviesQuery);
+    response.send(
+      directorMoviesList.map((eachObj) => ({ movieName: eachObj.movie_name }))
+    );
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
     process.exit(1);
   }
 });
+
+module.exports = app;
