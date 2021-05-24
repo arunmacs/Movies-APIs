@@ -54,7 +54,7 @@ app.get("/movies/", async (request, response) => {
     Response.send(moviesList.map((eachObj) => convertMovieJsonToObj(eachObj)));
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit(1);
   }
 });
 
@@ -74,7 +74,7 @@ app.post("/movies/", async (request, response) => {
     response.send("Movie Successfully Added");
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit();
   }
 });
 
@@ -91,7 +91,7 @@ app.get("/movies/:movieId/", async (request, response) => {
     response.send(convertMovieJsonToObj(movieDetails));
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit();
   }
 });
 
@@ -114,7 +114,7 @@ app.put("/movies/:movieId/", async (request, response) => {
     response.send("Movie Details Updated");
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit();
   }
 });
 
@@ -130,7 +130,7 @@ app.delete("/movies/:movieId/", async (request, response) => {
     response.send("Movie Removed");
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit();
   }
 });
 
@@ -147,7 +147,7 @@ app.get("/directors/", async (request, response) => {
     );
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit();
   }
 });
 
@@ -166,7 +166,7 @@ app.get("/directors/:directorId/movies/", async (request, response) => {
     );
   } catch (error) {
     console.log(`DB Query Error: ${error.message}`);
-    process.exit(1);
+    //process.exit();
   }
 });
 
